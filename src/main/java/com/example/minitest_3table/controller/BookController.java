@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet (urlPatterns = "/book")
-public class BookServlet extends HttpServlet {
+public class BookController extends HttpServlet {
     private BookDAO bookDAO;
     public void init() {
         bookDAO = new BookDAO();

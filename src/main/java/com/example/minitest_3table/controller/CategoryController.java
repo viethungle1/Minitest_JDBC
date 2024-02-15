@@ -1,7 +1,6 @@
 package com.example.minitest_3table.controller;
 
 
-import com.example.minitest_3table.model.Book;
 import com.example.minitest_3table.model.Category;
 import com.example.minitest_3table.service.category.CategoryDAO;
 import javax.servlet.RequestDispatcher;
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns ="/category")
-public class CategoryServlet extends HttpServlet {
+public class CategoryController extends HttpServlet {
     private CategoryDAO categoryDAO;
     public void init() {
         categoryDAO = new CategoryDAO();
