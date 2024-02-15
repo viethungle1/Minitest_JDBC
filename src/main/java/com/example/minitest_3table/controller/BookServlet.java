@@ -1,6 +1,6 @@
 package com.example.minitest_3table.controller;
 import com.example.minitest_3table.model.Book;
-import com.example.minitest_3table.service.BookDAO;
+import com.example.minitest_3table.service.book.BookDAO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

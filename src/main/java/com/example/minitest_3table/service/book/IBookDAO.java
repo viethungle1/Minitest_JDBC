@@ -1,4 +1,4 @@
-package com.example.minitest_3table.service;
+package com.example.minitest_3table.service.book;
 import com.example.minitest_3table.model.Book;
 import java.sql.SQLException;
 import java.util.List;

@@ -1,38 +1,21 @@
-package com.example.minitest_3table.service;
+package com.example.minitest_3table.service.book;
+import com.example.minitest_3table.config.ConnectionJDBC;
 import com.example.minitest_3table.model.Book;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class BookDAO implements IBookDAO {
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/minitest_3table";
-    private final String jdbcUsername = "root";
-    private final String jdbcPassword = "123456";
     private static final String INSERT_INTO_BOOK = "insert into book (name, author, description) value (?, ?, ?);";
     private static final String SELECT_ALL_BOOK = "select * from book;";
     private static final String UPDATE_BOOK = "update book set name=?, author=?, description=? where id=?;";
     private static final String SELECT_FROM_BOOK = "select * from book where id=?;";
     private static final String DELETE_FROM_BOOK = "delete from book where id=?;";
-
-    protected Connection getConnection() {
-        Connection c = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection(jdbcURL,jdbcUsername,jdbcPassword);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return c;
-    }
+    Connection c = ConnectionJDBC.getConnection();
     private void printSQLException(SQLException e) {
     }
-
     @Override
     public List<Book> showList() {
         List<Book> bookList = new ArrayList<>();
-        Connection c = getConnection();
         try {
             PreparedStatement statement = c.prepareStatement(SELECT_ALL_BOOK);
             ResultSet rs = statement.executeQuery();
@@ -51,7 +34,6 @@ public class BookDAO implements IBookDAO {
 
     @Override
     public void addBook(Book book) {
-        Connection c = getConnection();
         try {
             PreparedStatement statement = c.prepareStatement(INSERT_INTO_BOOK);
             statement.setString(1, book.getName());
@@ -65,7 +47,6 @@ public class BookDAO implements IBookDAO {
 
     @Override
     public void updateBook(Book book) {
-        Connection c = getConnection();
         try {
             PreparedStatement statement = c.prepareStatement(UPDATE_BOOK);
             statement.setString(1,book.getName());
@@ -81,7 +62,6 @@ public class BookDAO implements IBookDAO {
     @Override
     public Book selectBook(int id) {
         Book book = null;
-        Connection c = getConnection();
         try {
             PreparedStatement statement = c.prepareStatement(SELECT_FROM_BOOK);
             statement.setInt(1,id);
@@ -100,7 +80,6 @@ public class BookDAO implements IBookDAO {
 
     @Override
     public void deleteBook(int id) throws SQLException {
-        Connection c = getConnection();
         try {
             PreparedStatement statement = c.prepareStatement(DELETE_FROM_BOOK);
             statement.setInt(1,id);
