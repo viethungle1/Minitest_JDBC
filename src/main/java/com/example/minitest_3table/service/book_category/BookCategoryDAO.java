@@ -19,9 +19,10 @@ public class BookCategoryDAO implements IBookCategoryDAO {
             PreparedStatement statement = c.prepareStatement("select * from book_category;");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("id");
                 int id_book = rs.getInt("id_book");
                 int id_category = rs.getInt("id_category");
-                list.add(new BookCategory(id_book,id_category));
+                list.add(new BookCategory(id,id_book,id_category));
             }
         } catch (SQLException e) {
             printSQLException(e);

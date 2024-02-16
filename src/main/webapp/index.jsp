@@ -7,9 +7,9 @@
 <body>
 <center>
     <h2>TRANG CHỦ</h2>
-    <button type="submit" ><a href="/book">Move To Book</a></button>
-    <button type="submit" ><a href="/category">Move To Category</a></button>
-    <button type="submit" ><a href="/bookcategory">Move To BookCategory</a></button>
+    <button type="submit" ><a style="text-decoration: none" href="/book">Move To Book</a></button>
+    <button type="submit" ><a style="text-decoration: none" href="/category">Move To Category</a></button>
+    <button type="submit" ><a style="text-decoration: none" href="/bookcategory">Move To BookCategory</a></button>
 </center>
 <br>
 <div align="center">
