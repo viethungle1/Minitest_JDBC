@@ -1,6 +1,8 @@
 package com.example.minitest_3table.service.book;
 import com.example.minitest_3table.config.ConnectionJDBC;
 import com.example.minitest_3table.model.Book;
+import com.example.minitest_3table.model.Category;
+import com.example.minitest_3table.service.category.CategoryDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ public class BookDAO implements IBookDAO {
     private static final String UPDATE_BOOK = "update book set name=?, author=?, description=? where id=?;";
     private static final String SELECT_FROM_BOOK = "select * from book where id=?;";
     private static final String DELETE_FROM_BOOK = "delete from book where id=?;";
+    CategoryDAO categoryDAO = new CategoryDAO();
     Connection c = ConnectionJDBC.getConnection();
     private void printSQLException(SQLException e) {
     }
@@ -27,7 +30,7 @@ public class BookDAO implements IBookDAO {
                 bookList.add(new Book(id,name,author,description));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            printSQLException(e);
         }
         return bookList;
     }
@@ -87,5 +90,25 @@ public class BookDAO implements IBookDAO {
         } catch (SQLException e) {
             printSQLException(e);
         }
+    }
+    @Override
+    public List<Book> findAll() {
+        List<Book> bookList = new ArrayList<>();
+        try {
+            PreparedStatement statement = c.prepareStatement(SELECT_ALL_BOOK);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String author = rs.getString("author");
+                String description = rs.getString("description");
+                List<Category> category = categoryDAO.findAllByBookId(id);
+                Book book = new Book(id,name,author,description,category);
+                bookList.add(book);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return bookList;
     }
 }

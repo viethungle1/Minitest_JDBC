@@ -8,24 +8,22 @@
 <center>
     <h1>Category Manager</h1>
     <h2>
-        <a href="/category?action=create">Add New Category</a>
+        <a href="/bookcategory?action=create">Add New Category</a>
     </h2>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
+            <th>ID_Book</th>
+            <th>ID_Category</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="category" items="${list}">
+        <c:forEach var="list" items="${list}">
             <tr>
-                <td><c:out value="${category.id}"/></td>
-                <td><c:out value="${category.name}"/></td>
-                <td><c:out value="${category.description}"/></td>
+                <td><c:out value="${list.id_book}"/></td>
+                <td><c:out value="${list.id_category}"/></td>
                 <td>
-                    <a href="/category?action=delete&id=${category.id}">Delete</a>
+                    <a href="/bookcategory?action=delete&id=${list.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

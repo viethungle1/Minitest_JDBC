@@ -32,6 +32,11 @@
                 </td>
             </tr>
         </c:forEach>
+        <tr>
+            <td colspan="5">
+                <button type="submit" ><a href="/">Back</a></button>
+            </td>
+        </tr>
     </table>
 </div>
 </body>

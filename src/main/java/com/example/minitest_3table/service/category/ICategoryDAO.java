@@ -9,4 +9,6 @@ public interface ICategoryDAO {
     List<Category> showList();
     void addCategory(Category category);
     void deleteCategory(int id) throws SQLException;
+    List<Category> findAllByBookId(int id_book);
+
 }
