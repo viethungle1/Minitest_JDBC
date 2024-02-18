@@ -6,7 +6,6 @@ public class Category {
     private int id;
     private String name;
     private String description;
-    List<Book> bookList;
 
     public Category() {
     }
@@ -21,14 +20,6 @@ public class Category {
         this.name = name;
         this.description = desciption;
     }
-
-    public Category(int id, String name, String description, List<Book> bookList) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.bookList = bookList;
-    }
-
     public int getId() {
         return id;
     }

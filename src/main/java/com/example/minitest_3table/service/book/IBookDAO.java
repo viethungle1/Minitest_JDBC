@@ -10,4 +10,5 @@ public interface IBookDAO {
     void updateBook(Book book);
     void deleteBook(int id) throws SQLException;
     List<Book> findAll();
+    public void save(Book book, int[] categories);
 }

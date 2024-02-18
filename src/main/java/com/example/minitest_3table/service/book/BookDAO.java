@@ -12,6 +12,7 @@ public class BookDAO implements IBookDAO {
     private static final String UPDATE_BOOK = "update book set name=?, author=?, description=? where id=?;";
     private static final String SELECT_FROM_BOOK = "select * from book where id=?;";
     private static final String DELETE_FROM_BOOK = "delete from book where id=?;";
+    public static final String DELETE_FROM_BOOK_CATEGORY = "delete from book_category where id_book = ?;";
     CategoryDAO categoryDAO = new CategoryDAO();
     Connection c = ConnectionJDBC.getConnection();
     private void printSQLException(SQLException e) {
@@ -110,5 +111,39 @@ public class BookDAO implements IBookDAO {
             throw new RuntimeException(e);
         }
         return bookList;
+    }
+    @Override
+    public void save(Book book, int[] categories) {
+        int id_book = 0;
+//        ghi thong tin sach vao bang book
+        try{
+            PreparedStatement statement = c.prepareStatement(INSERT_INTO_BOOK,Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1,book.getName());
+            statement.setString(2,book.getAuthor());
+            statement.setString(3,book.getDescription());
+            int a =statement.executeUpdate();
+//            lay id cua sach vua duoc in ra
+            ResultSet rs = statement.getGeneratedKeys();
+            while (rs.next()) {
+                id_book = rs.getInt(1);
+            }
+//            ghi them ban ghi vao bang trung gian book_category
+            PreparedStatement statement1 = c.prepareStatement("insert into book_category (id_book,id_category) VALUE (?, ?);");
+            for (int id_category: categories) {
+                statement1.setInt(1,id_book);
+                statement1.setInt(2,id_category);
+                statement1.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void deleteByBookID(int id_book) throws SQLException {
+        PreparedStatement statement = c.prepareStatement(DELETE_FROM_BOOK_CATEGORY);
+        statement.setInt(1, id_book);
+        statement.executeUpdate();
+        PreparedStatement statement1 = c.prepareStatement(DELETE_FROM_BOOK);
+        statement1.setInt(1,id_book);
+        statement1.executeUpdate();
     }
 }

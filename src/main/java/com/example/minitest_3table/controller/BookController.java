@@ -51,7 +51,6 @@ public class BookController extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("book/list.jsp");
         dispatcher.forward(req,resp);
     }
-
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         req.setAttribute("book",bookDAO.selectBook(id));

@@ -6,7 +6,8 @@
 </head>
 <body>
 <center>
-    <h2>TRANG CHỦ</h2>
+    <h2>Home Page</h2>
+    <h3><a href="?action=create">Create New</a></h3>
     <button type="submit" ><a style="text-decoration: none" href="/book">Move To Book</a></button>
     <button type="submit" ><a style="text-decoration: none" href="/category">Move To Category</a></button>
     <button type="submit" ><a style="text-decoration: none" href="/bookcategory">Move To BookCategory</a></button>
@@ -19,6 +20,7 @@
             <th>Book_Name</th>
             <th>Author</th>
             <th>Category</th>
+            <th>Action</th>
         </tr>
         <c:forEach items="${list}" var="b">
             <tr>
@@ -29,6 +31,9 @@
                     <c:forEach items="${b.categories}" var="c">
                         <span>${c.name}</span> &nbsp;
                     </c:forEach>
+                </td>
+                <td>
+                    <a href="?action=delete&id=${b.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

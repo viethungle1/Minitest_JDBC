@@ -50,6 +50,6 @@ public class BookCategoryDAO implements IBookCategoryDAO {
         } catch (SQLException e) {
             printSQLException(e);
         }
-
     }
+
 }
